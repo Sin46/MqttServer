@@ -15,11 +15,11 @@ type MqttInfo struct {
 	KEEPALIVE int
 }
 
-
 type MqttSub struct{
     Enable bool
     Topic string
 }
+
 type MqttMsg struct{
     Topic,  Payload string
 }
@@ -44,15 +44,15 @@ func Sub(c MQTT.Client, sub_ch chan MqttSub) {
 	}
 }
 
-func Server(f MQTT.MessageHandler, pub_ch chan MqttMsg, sub_ch chan MqttSub){
-	var cg MqttInfo
-	cg = MqttInfo{
-		CLIENT_ID : "MAC0111",
-		BROKER_URL : "61.131.1.193:1883",
-		USERNAME : "FjdzMacUser",
-		PASSWORD :"geomacuser",
-		KEEPALIVE : 2,
-	}
+func Server(cg MqttInfo, f MQTT.MessageHandler, pub_ch chan MqttMsg, sub_ch chan MqttSub){
+	// var cg MqttInfo
+	// cg = MqttInfo{
+	// 	CLIENT_ID : "MAC0111",
+	// 	BROKER_URL : "61.131.1.193:1883",
+	// 	USERNAME : "FjdzMacUser",
+	// 	PASSWORD :"geomacuser",
+	// 	KEEPALIVE : 2,
+	// }
 
 	fmt.Println("Init Mqtt Successfully:",cg.Mqtt)
 	opts := MQTT.NewClientOptions().AddBroker("tcp://"+cg.Mqtt.BROKER_URL).SetClientID(cg.Mqtt.CLIENT_ID)
