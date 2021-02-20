@@ -78,25 +78,3 @@ func Server(f MQTT.MessageHandler, pub_ch chan MqttMsg, sub_ch chan MqttSub){
 		token.Wait()
 	}
 }
-
-//声明MQTT的接口
-var mqtt_pub_ch = make(chan MqttMsg)
-var mqtt_sub_ch = make(chan MqttSub)
-var mqtt_sub_func MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
-    // CONTROLLER.SubHandler(mqtt_pub_ch, msg.Topic(), msg.Payload())
-	fmt.Println("get message")
-}
-
-// func main(){
-// 	var temp MqttSub
-
-// 	go Server(mqtt_sub_func, mqtt_pub_ch, mqtt_sub_ch)
-// 	temp.Enable=true
-// 	temp.Topic="Publish_MAC009"
-// 	mqtt_sub_ch <- temp
-// 	temp.Topic="Subscription_MAC009"
-// 	mqtt_sub_ch <- temp
-// 	for {
-//         //redis某个键值更新 : pub_ch <- sendMsg
-//     }
-// }
