@@ -55,10 +55,10 @@ func Server(cg MqttInfo, f MQTT.MessageHandler, pub_ch chan MqttMsg, sub_ch chan
 	// }
 
 	fmt.Println("Init Mqtt Successfully:",cg)
-	opts := MQTT.NewClientOptions().AddBroker("tcp://"+cg.Mqtt.BROKER_URL).SetClientID(cg.Mqtt.CLIENT_ID)
+	opts := MQTT.NewClientOptions().AddBroker("tcp://"+cg.BROKER_URL).SetClientID(cg.CLIENT_ID)
 	opts.SetKeepAlive(2 * time.Second)
-	opts.SetUsername(cg.Mqtt.USERNAME)
-	opts.SetPassword(cg.Mqtt.PASSWORD)
+	opts.SetUsername(cg.USERNAME)
+	opts.SetPassword(cg.PASSWORD)
 	opts.SetDefaultPublishHandler(f)
 	opts.SetPingTimeout(1 * time.Second)
 
