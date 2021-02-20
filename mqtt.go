@@ -15,9 +15,6 @@ type MqttInfo struct {
 	KEEPALIVE int
 }
 
-type MqttConfig struct {
-    Mqtt MqttInfo
-}
 
 type MqttSub struct{
     Enable bool
@@ -48,8 +45,8 @@ func Sub(c MQTT.Client, sub_ch chan MqttSub) {
 }
 
 func Server(f MQTT.MessageHandler, pub_ch chan MqttMsg, sub_ch chan MqttSub){
-	var cg MqttConfig
-	cg.Mqtt = MqttInfo{
+	var cg MqttInfo
+	cg = MqttInfo{
 		CLIENT_ID : "MAC0111",
 		BROKER_URL : "61.131.1.193:1883",
 		USERNAME : "FjdzMacUser",
