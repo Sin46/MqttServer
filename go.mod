@@ -1,3 +1,3 @@
-module github.com/Sin46/MqttServer@0.0.2
+module github.com/Sin46/MqttServer
 
 go 1.15
