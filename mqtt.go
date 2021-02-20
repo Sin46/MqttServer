@@ -7,7 +7,7 @@ import (
 	MQTT "github.com/eclipse/paho.mqtt.golang"
 )
 
-type mqttInfo struct {
+type MqttInfo struct {
 	CLIENT_ID string
     BROKER_URL string
 	USERNAME string
@@ -15,8 +15,8 @@ type mqttInfo struct {
 	KEEPALIVE int
 }
 
-type config struct {
-    Mqtt mqttInfo
+type MqttConfig struct {
+    Mqtt MqttInfo
 }
 
 type MqttSub struct{
@@ -48,8 +48,8 @@ func Sub(c MQTT.Client, sub_ch chan MqttSub) {
 }
 
 func Server(f MQTT.MessageHandler, pub_ch chan MqttMsg, sub_ch chan MqttSub){
-	var cg config
-	cg.Mqtt = mqttInfo{
+	var cg MqttConfig
+	cg.Mqtt = MqttInfo{
 		CLIENT_ID : "MAC0111",
 		BROKER_URL : "61.131.1.193:1883",
 		USERNAME : "FjdzMacUser",
