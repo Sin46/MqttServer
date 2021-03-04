@@ -45,14 +45,6 @@ func Sub(c MQTT.Client, sub_ch chan MqttSub) {
 }
 
 func Server(cg MqttInfo, f MQTT.MessageHandler, pub_ch chan MqttMsg, sub_ch chan MqttSub){
-	// var cg MqttInfo
-	// cg = MqttInfo{
-	// 	CLIENT_ID : "MAC0111",
-	// 	BROKER_URL : "61.131.1.193:1883",
-	// 	USERNAME : "FjdzMacUser",
-	// 	PASSWORD :"geomacuser",
-	// 	KEEPALIVE : 2,
-	// }
 
 	fmt.Println("Init Mqtt Successfully:",cg)
 	opts := MQTT.NewClientOptions().AddBroker("tcp://"+cg.BROKER_URL).SetClientID(cg.CLIENT_ID)
