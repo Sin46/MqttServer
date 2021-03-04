@@ -23,7 +23,7 @@ type ClientInfo struct {
 	KeepAlive int
 }
 
-func newClient(info ClientInfo) *Client {
+func NewClient(info ClientInfo) (*Client, error) {
 	//fmt.Println("Init Mqtt Successfully:", cg)
 	client := &Client{}
 	client.out = make(chan Msg)
@@ -42,7 +42,7 @@ func newClient(info ClientInfo) *Client {
 		}).
 		SetPingTimeout(1 * time.Second))
 	if token := client.base.Connect(); token.Wait() && token.Error() != nil {
-		panic(token.Error())
+		return nil, token.Error()
 	}
 
 	go func() {
@@ -51,11 +51,19 @@ func newClient(info ClientInfo) *Client {
 			token.Wait()
 		}
 	}()
-	return client
+	return client, nil
 }
 
-func (client *Client) subscribe(topic string) {
-	if token := client.base.Subscribe(topic, 0, nil); token.Wait() && token.Error() != nil {
-		panic(token.Error())
-	}
+func (client *Client) Subscribe(topic string) error {
+	token := client.base.Subscribe(topic, 0, nil)
+	token.Wait()
+	return token.Error()
+}
+
+func (client *Client) In() chan Msg {
+	return client.in
+}
+
+func (client *Client) Out() chan Msg {
+	return client.out
 }
